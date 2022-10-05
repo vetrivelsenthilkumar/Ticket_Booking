@@ -3,10 +3,8 @@ package controllers
 import (
 	"Ticket_Booking_App/initializers"
 	"Ticket_Booking_App/models"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 )
 
 func Signup(c *gin.Context) {
@@ -45,5 +43,4 @@ func Signup(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"user": user,
 	})
-	mail(passenger_detail.Email, "Successfully created the account")
 }

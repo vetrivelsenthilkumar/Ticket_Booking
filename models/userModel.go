@@ -5,7 +5,6 @@ import "gorm.io/gorm"
 type Passenger struct {
 	gorm.Model
 
-	Id       uint   `gorm:"primaryKey;not null"`
 	Name     string `json:"name" gorm:"type:varchar(100)"`
 	Age      int    `json:"age" gorm:"not null"`
 	Email    string `json:"email" gorm:"type:varchar(100);PrimaryKey;not null"`
