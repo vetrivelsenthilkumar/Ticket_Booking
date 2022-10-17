@@ -1,4 +1,4 @@
-package main
+package migration
 
 import (
 	"Ticket_Booking_App/initializers"
@@ -10,6 +10,6 @@ func init() {
 	initializers.Connecting_db()
 }
 
-func main() {
-	initializers.DB.AutoMigrate(&models.Passenger{}, &models.Train{})
+func MigrateTable() {
+	initializers.DB.AutoMigrate(&models.User{}, &models.Train{})
 }

@@ -24,7 +24,7 @@ func Signup(c *gin.Context) {
 
 	c.Bind(&passenger_detail)
 
-	user := models.Passenger{Name: passenger_detail.Name, Age: passenger_detail.Age, Email: passenger_detail.Email, Password: passenger_detail.Password}
+	user := models.User{Name: passenger_detail.Name, Age: passenger_detail.Age, Email: passenger_detail.Email, Password: passenger_detail.Password}
 
 	result := initializers.DB.Create(&user)
 
@@ -54,7 +54,7 @@ func Login(c *gin.Context) {
 			"error": "Unable to login the details",
 		})
 	}
-	var user models.Passenger
+	var user models.User
 	initializers.DB.First(&user, "email = ?", passenger_detail.Email)
 
 	if user.ID == 0 {
@@ -84,7 +84,7 @@ func Login(c *gin.Context) {
 }
 
 func GetUsers(c *gin.Context) {
-	var users []models.Passenger
+	var users []models.User
 	initializers.DB.Find(&users)
 
 	c.JSON(200, gin.H{
@@ -105,10 +105,10 @@ func UsersUpdate(c *gin.Context) {
 
 	c.Bind(&passenger_detail)
 
-	var user []models.Passenger
+	var user []models.User
 	initializers.DB.First(&user, id)
 
-	initializers.DB.Model(&user).Updates(models.Passenger{Name: passenger_detail.Name, Age: passenger_detail.Age, Email: passenger_detail.Email, Password: passenger_detail.Password})
+	initializers.DB.Model(&user).Updates(models.User{Name: passenger_detail.Name, Age: passenger_detail.Age, Email: passenger_detail.Email, Password: passenger_detail.Password})
 
 	c.JSON(200, gin.H{
 		"user": user,
@@ -120,7 +120,7 @@ func UsersDelete(c *gin.Context) {
 
 	id := c.Param("id")
 
-	var user []models.Passenger
+	var user []models.User
 	initializers.DB.Delete(&user, id)
 
 	c.JSON(200, gin.H{
@@ -151,7 +151,7 @@ func BookTrain(c *gin.Context) {
 
 	c.Bind(&train)
 
-	trains := models.Train{Train_number: uint(train.Train_number), From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type}
+	trains := models.Train{Train_number: string(train.Train_number), From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type}
 
 	result := initializers.DB.Create(&trains)
 
@@ -194,7 +194,7 @@ func TrainUpdate(c *gin.Context) {
 	var trains []models.Train
 	initializers.DB.First(&trains, train_number)
 
-	initializers.DB.Model(&trains).Updates(models.Train{Train_number: uint(train.Train_number), From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type})
+	initializers.DB.Model(&trains).Updates(models.Train{Train_number: string(train.Train_number), From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type})
 
 	c.JSON(200, gin.H{
 		"trains": trains,
@@ -207,7 +207,7 @@ func CancelBooking(c *gin.Context) {
 
 	train_number := c.Param("train_number")
 
-	var user []models.Passenger
+	var user []models.User
 	initializers.DB.Delete(&user, train_number)
 
 	c.JSON(200, gin.H{

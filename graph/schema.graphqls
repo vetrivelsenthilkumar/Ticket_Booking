@@ -1,0 +1,57 @@
+
+directive @goField(forceResolver: Boolean, name: String) on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+scalar Any
+directive @auth on FIELD_DEFINITION
+
+type User {
+  Name: String!
+  Age: Int!
+  Email: String!
+  Password: String!
+}
+
+input NewUser {
+  Name: String!
+  Age: Int!
+  Email: String!
+  Password: String
+}
+
+type Train{
+  train_number: String!
+  From: String!
+  To: String!
+  Coach_number: String!
+  Seat_number: Int!
+  Seat_type: String!
+}
+
+input NewTrain{
+  train_number: String!
+  From: String!
+  To: String!
+  Coach_number: String!
+  Seat_number: Int!
+  Seat_type: String!
+}
+
+
+type AuthOps {
+  login(email: String!, password: String!): Any! @goField(forceResolver: true)
+  register(input: NewUser!): Any! @goField(forceResolver: true)
+}
+
+type Query {
+  user(email: String!): User! @goField(forceResolver: true)
+  train(train_number: String!): Train! @goField(forceResolver: true)
+  protected: String! @goField(forceResolver: true) @auth
+}
+
+type TrainReserve {
+  book(input: NewTrain!): Any! @goField(forceResolver: true)
+}
+
+type Mutation {
+  auth: AuthOps! @goField(forceResolver: true)
+  train: TrainReserve! @goField(forceResolver: true)
+}
