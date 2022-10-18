@@ -33,13 +33,13 @@ func BookTrain(ctx context.Context, input model.NewTrain) (interface{}, error) {
 		return nil, err
 	}
 
-	Mail("vetrisenthilmkce@gmail.com", "Ticket is Booked Successfully.")
+	Mail("vetrisenthilmkce@gmail.com", "Reg: Ticket booking", "Ticket is Booked Successfully.")
 
 	return &train, nil
 
 }
 
-func Mail(Email, Msg string) {
+func Mail(Email, Subject, Msg string) {
 
 	from := "vetrisenthilmkce@gmail.com"
 	password := os.Getenv("PASSWD")

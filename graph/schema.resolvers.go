@@ -8,7 +8,6 @@ import (
 	"Ticket_Booking_App/graph/model"
 	"Ticket_Booking_App/service"
 	"context"
-	"fmt"
 )
 
 // Login is the resolver for the login field.
@@ -43,7 +42,7 @@ func (r *queryResolver) Train(ctx context.Context, trainNumber string) (*model.T
 
 // Protected is the resolver for the protected field.
 func (r *queryResolver) Protected(ctx context.Context) (string, error) {
-	panic(fmt.Errorf("not implemented: Protected - protected"))
+	return "Success", nil
 }
 
 // Book is the resolver for the book field.

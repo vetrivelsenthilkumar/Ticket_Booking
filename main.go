@@ -9,7 +9,7 @@ func init() {
 	initializers.Connecting_db()
 }
 
-// func Main() {
+// func main() {
 // 	r := gin.Default()
 // 	r.SetTrustedProxies([]string{"192.168.1.2"})
 // 	r.POST("/signup", controllers.Signup)

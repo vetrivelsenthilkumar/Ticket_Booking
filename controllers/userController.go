@@ -37,7 +37,7 @@ func Signup(c *gin.Context) {
 		"user": user,
 	})
 
-	mail(passenger_detail.Email, "Successfully created the account")
+	// mail(passenger_detail.Email, "Successfully created the account")
 }
 
 func Login(c *gin.Context) {
@@ -141,7 +141,7 @@ func Validate(c *gin.Context) {
 
 func BookTrain(c *gin.Context) {
 	var train struct {
-		Train_number uint
+		Train_number string
 		From         string
 		To           string
 		Coach_number string
@@ -151,7 +151,7 @@ func BookTrain(c *gin.Context) {
 
 	c.Bind(&train)
 
-	trains := models.Train{Train_number: string(train.Train_number), From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type}
+	trains := models.Train{Train_number: train.Train_number, From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type}
 
 	result := initializers.DB.Create(&trains)
 
@@ -181,7 +181,7 @@ func TrainUpdate(c *gin.Context) {
 	train_number := c.Param("train_number")
 
 	var train struct {
-		Train_number uint
+		Train_number string
 		From         string
 		To           string
 		Coach_number string
@@ -194,7 +194,7 @@ func TrainUpdate(c *gin.Context) {
 	var trains []models.Train
 	initializers.DB.First(&trains, train_number)
 
-	initializers.DB.Model(&trains).Updates(models.Train{Train_number: string(train.Train_number), From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type})
+	initializers.DB.Model(&trains).Updates(models.Train{Train_number: train.Train_number, From: train.From, To: train.To, Coach_number: train.Coach_number, Seat_number: train.Seat_number, Seat_type: train.Seat_type})
 
 	c.JSON(200, gin.H{
 		"trains": trains,
