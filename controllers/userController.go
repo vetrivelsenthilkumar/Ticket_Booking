@@ -37,7 +37,7 @@ func Signup(c *gin.Context) {
 		"user": user,
 	})
 
-	// mail(passenger_detail.Email, "Successfully created the account")
+	mail(passenger_detail.Email, "Successfully created the account")
 }
 
 func Login(c *gin.Context) {

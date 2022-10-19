@@ -14,7 +14,7 @@ input NewUser {
   Name: String!
   Age: Int!
   Email: String!
-  Password: String
+  Password: String!
 }
 
 type Train{
